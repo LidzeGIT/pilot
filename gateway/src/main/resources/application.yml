@@ -1,0 +1,18 @@
+spring:
+    application:
+        name: gateway
+    security:
+        user:
+            password: qwerty
+
+server:
+    port: 8084
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+
+logging:
+    pattern:
+        console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
