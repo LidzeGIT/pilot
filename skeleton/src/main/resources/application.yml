@@ -1,0 +1,29 @@
+spring:
+    kafka:
+        bootstrap-servers: localhost:9092
+        consumer:
+            group-id: your-group-id
+            auto-offset-reset: earliest
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    liquibase:
+        enabled: true
+        change-log:  classpath:db/changelog-master.yml
+        default-schema: public
+    datasource:
+        platform: postgres
+        driverClassName: org.postgresql.Driver
+        url: jdbc:postgresql://localhost/postgres
+        username: postgres
+        password: postgres
+    security:
+        user:
+            password: qwerty
+
+
+logging:
+    pattern:
+        console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
