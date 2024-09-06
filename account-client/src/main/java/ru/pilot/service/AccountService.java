@@ -1,5 +1,6 @@
 package ru.pilot.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.pilot.entity.Account;
 import ru.pilot.entity.AccountType;
@@ -32,25 +33,27 @@ public class AccountService {
         this.accountTypeRepository = accountTypeRepository;
         this.currencyRepository = currencyRepository;
     }
-
+    @Autowired
+    private AccountMapper accountMapper;
 
     public CreateAccountDtoResponse createAccounts(CreateAccountDtoRequest createAccountDto) {
-        Optional<AccountType> byAccountType = accountTypeRepository.findByAccountType(createAccountDto.accountType());
-        Optional<Currency> byCurrencyCode = currencyRepository.findByCurrencyCode(createAccountDto.currency());
+        AccountType accountType = accountTypeRepository.findByAccountType(createAccountDto.accountType())
+                .orElseThrow(() -> new IllegalArgumentException("AccountType not found"));
 
-        Account account = new Account(byAccountType.get(), createAccountDto.userId(), false,
-                BigDecimal.valueOf(createAccountDto.initialDeposit()), byCurrencyCode.get());
+        Currency currency = currencyRepository.findByCurrencyCode(createAccountDto.currency())
+                .orElseThrow(() -> new IllegalArgumentException("Currency not found"));
+
+        Account account = accountMapper.createAccountDtoRequestToAccount(accountType, createAccountDto.userId(), false,
+                BigDecimal.valueOf(createAccountDto.initialDeposit()), currency);
 
         account = accountRepository.save(account);
 
-        return new CreateAccountDtoResponse(account.getId(), account.getAccountType().getAccountType(), account.getUserId(),
-                account.getBalance(), account.getDeleted(), account.getCurrency().getCurrencyCode()
-                , account.getCreatedAt());
+        return accountMapper.accountToCreateAccountDtoResponse(account);
     }
 
     public void deleteAccount(Integer accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
-        account.get().setDeleted(true);
+        account.get().setIsDeleted(true);
         accountRepository.save(account.get());
     }
 
@@ -60,21 +63,13 @@ public class AccountService {
 
     public List<CreateAccountDtoResponse> getAccounts() {
         return accountRepository.findAll().stream()
-                .map(account -> new CreateAccountDtoResponse(
-                        account.getId(),
-                        account.getAccountType() != null ? account.getAccountType().getAccountType() : null,
-                        account.getUserId(),
-                        account.getBalance(),
-                        account.getDeleted(),
-                        account.getCurrency() != null ? account.getCurrency().getCurrencyCode() : null,
-                        account.getCreatedAt()))
+                .map(account -> accountMapper.accountToCreateAccountDtoResponse(account))
                 .collect(Collectors.toList());
     }
 
     public CreateAccountDtoResponse getAccounts(Integer accountId) {
         Account account = accountRepository.findById(accountId).get();
-        return new CreateAccountDtoResponse(account.getId(), account.getAccountType().getAccountType(), account.getUserId(),
-                account.getBalance(),account.getDeleted(), account.getCurrency().getCurrencyCode(), account.getCreatedAt());
+        return accountMapper.accountToCreateAccountDtoResponse(account);
     }
 
 }
