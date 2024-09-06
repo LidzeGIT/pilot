@@ -6,12 +6,12 @@ spring:
             password: qwerty
 
 server:
-    port: 8084
+    port: 8080
 
 eureka:
     client:
         serviceUrl:
-            defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+            defaultZone: ${EUREKA_URI:http://pilot-eureka-server-1:8761/eureka}
 
 logging:
     pattern:
