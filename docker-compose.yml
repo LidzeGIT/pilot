@@ -32,6 +32,8 @@ services:
     restart: "no"
     ports:
       - "8080:8080"
+    depends_on:
+      - eureka-server
     networks:
       - app-network
 
@@ -41,6 +43,10 @@ services:
     restart: "no"
     ports:
       - "8081:8081"
+    depends_on:
+      - postgres
+      - eureka-server
+      - gateway
     networks:
       - app-network
       
