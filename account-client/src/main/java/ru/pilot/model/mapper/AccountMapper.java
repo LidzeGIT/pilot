@@ -1,4 +1,4 @@
-package ru.pilot.service;
+package ru.pilot.model.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

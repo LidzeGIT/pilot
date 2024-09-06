@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.pilot.entity.Account;
 import ru.pilot.entity.AccountType;
 import ru.pilot.entity.Currency;
+import ru.pilot.model.mapper.AccountMapper;
 import ru.pilot.model.request.CreateAccountDtoRequest;
 import ru.pilot.model.request.UpdateAccountDtoRequest;
 import ru.pilot.model.response.CreateAccountDtoResponse;
