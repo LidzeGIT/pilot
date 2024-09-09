@@ -39,7 +39,7 @@ public class AccountTypeControllerImpl implements AccountTypeController {
     }
 
     @Override
-    public AccountType patch(@PathVariable Integer id, @RequestBody AccountTypeDtoRequest accountType) throws IOException {
+    public AccountType patch(@PathVariable Integer id, @RequestBody AccountTypeDtoRequest accountType) {
         return accountTypeService.patch(id, accountType);
     }
 

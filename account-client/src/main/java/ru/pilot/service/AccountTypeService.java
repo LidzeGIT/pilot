@@ -16,8 +16,7 @@ public class AccountTypeService {
 
     private final AccountTypeRepository accountTypeRepository;
 
-    public AccountTypeService(AccountTypeRepository accountTypeRepository,
-                              ObjectMapper objectMapper) {
+    public AccountTypeService(AccountTypeRepository accountTypeRepository) {
         this.accountTypeRepository = accountTypeRepository;
     }
 

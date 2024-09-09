@@ -44,21 +44,8 @@ public class Account {
     @UpdateTimestamp
     private Instant updatedAt;
 
-    public Account(AccountType accountType, Integer userId, boolean isDeleted,BigDecimal balance, Currency currency) {
-        this.accountType = accountType;
-        this.userId = userId;
-        this.isDeleted = isDeleted;
-        this.balance = balance;
-        this.currency = currency;
-    }
-
     public Account() {
     }
-
-    public Account(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
 
     public Integer getId() {
         return id;
