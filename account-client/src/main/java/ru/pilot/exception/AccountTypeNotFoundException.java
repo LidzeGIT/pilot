@@ -1,7 +1,7 @@
 package ru.pilot.exception;
 
-public class AccountTypeNotFoundException extends Exception {
-    public AccountTypeNotFoundException(String formatted) {
-        super("Invalid account type: ".concat(formatted));
+public class AccountTypeNotFoundException extends RuntimeException {
+    public AccountTypeNotFoundException() {
+        super("AccountType not found");
     }
 }

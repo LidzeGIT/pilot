@@ -11,7 +11,7 @@ server:
 eureka:
     client:
         serviceUrl:
-            defaultZone: ${EUREKA_URI:http://pilot-eureka-server-1:8761/eureka}
+            defaultZone: ${EUREKA_URI}
 
 logging:
     pattern:

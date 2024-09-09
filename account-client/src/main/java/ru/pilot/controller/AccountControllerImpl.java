@@ -4,6 +4,7 @@ import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.pilot.model.request.CreateAccountDtoRequest;
 import ru.pilot.model.request.UpdateAccountDtoRequest;
@@ -12,7 +13,8 @@ import ru.pilot.service.AccountService;
 
 import java.util.List;
 
-@RestController
+@RestController()
+@RequestMapping("/api/v1/accounts")
 public class AccountControllerImpl implements AccountController {
 
     @Autowired
@@ -41,8 +43,8 @@ public class AccountControllerImpl implements AccountController {
     }
 
     @Override
-    public CreateAccountDtoResponse updateAccount(UpdateAccountDtoRequest changeAccountDtoRequest, long accountId) {
-        return null;
+    public CreateAccountDtoResponse updateAccount(UpdateAccountDtoRequest changeAccountDtoRequest, Integer accountId) {
+        return accountService.updateAccount(changeAccountDtoRequest, accountId);
     }
 
     @Override

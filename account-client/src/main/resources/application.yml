@@ -8,9 +8,9 @@ spring:
     datasource:
         platform: postgres
         driverClassName: org.postgresql.Driver
-        url: jdbc:postgresql://pilot-postgres-1:5432/postgres
-        username: postgres
-        password: postgres
+        url: ${DB_HOST}
+        username: ${DB_USER}
+        password: ${DB_PASS}
 
 server:
     port: 8081
@@ -18,6 +18,6 @@ server:
 eureka:
     client:
         serviceUrl:
-            defaultZone: ${EUREKA_URI:http://pilot-eureka-server-1:8761/eureka}
+            defaultZone: ${EUREKA_URI}
     instance:
         preferIpAddress: true

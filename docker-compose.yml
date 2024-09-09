@@ -7,6 +7,7 @@ networks:
 
 services:
   postgres:
+    container_name: postgres_db
     image: postgres:13.3
     environment:
       POSTGRES_DB: "postgres"
@@ -18,6 +19,7 @@ services:
       - app-network  # Подключаем сервис к созданной сети
 
   eureka-server:
+    container_name: eureka-server
     image: eureka-server:latest
     build: eureka-server
     restart: "no"
@@ -27,8 +29,11 @@ services:
       - app-network
 
   gateway:
+    container_name: gateway
     image: gateway:latest
     build: gateway
+    environment:
+      EUREKA_URI: http://eureka-server:8761/eureka
     restart: "no"
     ports:
       - "8080:8080"
@@ -38,8 +43,14 @@ services:
       - app-network
 
   account-client:
+    container_name: account
     image: account-client:latest
     build: account-client
+    environment:
+      EUREKA_URI: http://eureka-server:8761/eureka
+      DB_HOST: jdbc:postgresql://postgres_db/postgres
+      DB_USER: postgres
+      DB_PASS: postgres
     restart: "no"
     ports:
       - "8081:8081"
@@ -49,7 +60,7 @@ services:
       - gateway
     networks:
       - app-network
-      
+
 #  zookeeper:
 #    image: confluentinc/cp-zookeeper:7.2.1
 #    hostname: zookeeper

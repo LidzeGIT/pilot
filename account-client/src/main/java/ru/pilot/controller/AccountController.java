@@ -11,16 +11,16 @@ import java.util.List;
 
 public interface AccountController {
 
-        @PostMapping("/accounts")
+        @PostMapping()
         CreateAccountDtoResponse createAccounts(@RequestBody CreateAccountDtoRequest createAccountDto);
-        @GetMapping("/accounts/{accountId}")
+        @GetMapping("/{accountId}")
         CreateAccountDtoResponse getAccounts(@PathVariable("accountId") Integer accountId);
-        @GetMapping("/accounts")
+        @GetMapping()
         List<CreateAccountDtoResponse> getAccounts();
-        @PutMapping("/accounts/{accountId}")
+        @PutMapping("/{accountId}")
         CreateAccountDtoResponse updateAccount(@RequestBody UpdateAccountDtoRequest changeAccountDtoRequest,
-                                               @PathVariable("accountId") long accountId);
-        @DeleteMapping("/accounts/{accountId}")
+                                               @PathVariable("accountId") Integer accountId);
+        @DeleteMapping("/{accountId}")
         void deleteAccount(@PathVariable("accountId") Integer accountId);
 
 }

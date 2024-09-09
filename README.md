@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS UserRole (
 5) SERIAL представляет автоинкрементирующееся числовое значение.
 6) При успешном создании таблицы в логе будет текст:
 ```text
-Query CREATE TABLE IF NOT EXISTS "test" (
+ CREATE TABLE IF NOT EXISTS "test" (
    user_id SERIAL PRIMARY KEY
    );
 дата создания

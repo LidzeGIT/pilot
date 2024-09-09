@@ -1,15 +1,13 @@
-FROM amazoncorretto:17-alpine AS layers
-WORKDIR /application
-COPY target/*.jar app.jar
-RUN java -Djarmode=layertools -jar app.jar extract
+# First stage: complete build environment
+FROM maven:3.8.3-openjdk-17 AS builder
+WORKDIR /app
+COPY ./pom.xml ./pom.xml
+COPY ./src ./src/
+RUN mvn clean package  -DskipTests
 
-FROM amazoncorretto:17-alpine
-VOLUME /tmp
-RUN adduser -S spring-user
-USER spring-user
-COPY --from=layers /application/dependencies/ ./
-COPY --from=layers /application/spring-boot-loader/ ./
-COPY --from=layers /application/snapshot-dependencies/ ./
-COPY --from=layers /application/application/ ./
-
-ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
+# Second stage: minimal runtime environment
+FROM openjdk:17-jdk as app
+WORKDIR /app
+COPY --from=builder /app/target/gateway-0.0.1-SNAPSHOT.jar .
+EXPOSE 8080
+CMD ["java", "-jar", "gateway-0.0.1-SNAPSHOT.jar"]
