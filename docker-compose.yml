@@ -43,7 +43,7 @@ services:
       - app-network
 
   account-client:
-    container_name: account
+    container_name: account-client
     image: account-client:latest
     build: account-client
     environment:

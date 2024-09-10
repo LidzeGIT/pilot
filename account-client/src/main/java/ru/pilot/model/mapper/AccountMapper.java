@@ -18,9 +18,9 @@ public interface AccountMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "accountType", source = "accountType")
     @Mapping(target = "isDeleted", source = "isDeleted")
-    @Mapping(target = "balance", source = "balance")
+    @Mapping(target = "amount", source = "amount")
     @Mapping(target = "currency", source = "currency")
-    Account toEntity(AccountType accountType, Integer userId, boolean isDeleted, BigDecimal balance, Currency currency);
+    Account toEntity(AccountType accountType, Integer userId, boolean isDeleted, BigDecimal amount, Currency currency);
 
     @Mapping(target = "accountId", source = "id")
     @Mapping(target = "accountType", source = "accountType.accountType")

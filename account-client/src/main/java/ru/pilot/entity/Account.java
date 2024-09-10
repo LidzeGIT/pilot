@@ -28,8 +28,8 @@ public class Account {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
-    @Column(name = "balance", precision = 15, scale = 2)
-    private BigDecimal balance;
+    @Column(name = "amount", precision = 15, scale = 2)
+    private BigDecimal amount;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -79,12 +79,12 @@ public class Account {
         this.userId = userId;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public Currency getCurrency() {

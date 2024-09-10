@@ -12,5 +12,4 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
 
     @Override
     void deleteById(Integer accountId);
-
 }

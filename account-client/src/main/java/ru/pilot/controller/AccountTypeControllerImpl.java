@@ -5,11 +5,10 @@ import ru.pilot.entity.AccountType;
 import ru.pilot.model.request.AccountTypeDtoRequest;
 import ru.pilot.service.AccountTypeService;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/account_types")
+@RequestMapping("/api/v1/account_types")
 public class AccountTypeControllerImpl implements AccountTypeController {
 
     private final AccountTypeService accountTypeService;

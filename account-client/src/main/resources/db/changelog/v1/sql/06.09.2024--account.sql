@@ -20,7 +20,7 @@ CREATE TABLE accounts (
     account_type_id INT REFERENCES account_types(account_type_id) ON DELETE CASCADE,
     user_id INT,
     is_deleted boolean DEFAULT true,
-    balance NUMERIC(15, 2) DEFAULT 0.00,
+    amount NUMERIC(15, 2) DEFAULT 0.00,
     currency_id INT REFERENCES currencies(currency_id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

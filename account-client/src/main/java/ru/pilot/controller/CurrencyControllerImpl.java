@@ -9,7 +9,7 @@ import ru.pilot.service.CurrencyService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/currency")
+@RequestMapping("/api/v1/currency")
 public class CurrencyControllerImpl implements CurrencyController{
 
     private final CurrencyService currencyService;
