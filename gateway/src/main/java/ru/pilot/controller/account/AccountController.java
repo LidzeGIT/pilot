@@ -9,19 +9,20 @@ import ru.pilot.service.IAccountClient;
 
 @Tag(name = "AccountController", description = "AccountController")
 @RestController
+@RequestMapping("/account-service")
 public class AccountController {
 
     @Autowired
     private IAccountClient iAccountClient;
 
-    @GetMapping("/{accountId}")
-    public Object getAccounts(@PathVariable("accountId") Integer a) {
-        return iAccountClient.getAccounts(a);
-    }
-
     @GetMapping("/accounts")
     public Object getAccounts() {
         return iAccountClient.getAccounts();
+    }
+
+    @GetMapping("/accounts/{accountId}")
+    public Object getAccounts(@PathVariable("accountId") Integer a) {
+        return iAccountClient.getAccounts(a);
     }
 
     @PutMapping("/accounts/{accountId}")

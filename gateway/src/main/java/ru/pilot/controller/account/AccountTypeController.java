@@ -10,6 +10,7 @@ import java.util.List;
 
 @Tag(name = "AccountTypeController", description = "AccountTypeController")
 @RestController
+@RequestMapping("/account-service")
 public class AccountTypeController {
 
     @Autowired

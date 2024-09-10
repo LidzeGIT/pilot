@@ -10,6 +10,7 @@ import java.util.List;
 
 @Tag(name = "CurrencyController", description = "CurrencyController")
 @RestController
+@RequestMapping("/account-service")
 public class CurrencyController {
 
     @Autowired
