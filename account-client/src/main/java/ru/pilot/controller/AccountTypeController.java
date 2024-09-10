@@ -3,21 +3,47 @@ package ru.pilot.controller;
 import org.springframework.web.bind.annotation.*;
 import ru.pilot.entity.AccountType;
 import ru.pilot.model.request.AccountTypeDtoRequest;
+import ru.pilot.service.AccountTypeService;
 
-import java.io.IOException;
 import java.util.List;
 
-public interface AccountTypeController {
+@RestController
+@RequestMapping("/api/v1/account_types")
+public class AccountTypeController {
+
+    private final AccountTypeService accountTypeService;
+
+    public AccountTypeController(AccountTypeService accountTypeService) {
+        this.accountTypeService = accountTypeService;
+    }
+
     @GetMapping
-    List<AccountType> getList() ;
+    public List<AccountType> getList() {
+        return accountTypeService.getList();
+    }
+
     @GetMapping("/{id}")
-    AccountType getOne(@PathVariable Integer id);
+    public AccountType getOne(@PathVariable Integer id) {
+        return accountTypeService.getOne(id);
+    }
+
     @GetMapping("/ids")
-    List<AccountType> getMany(@RequestParam List<Integer> ids);
+    public List<AccountType> getMany(@RequestParam List<Integer> ids) {
+        return accountTypeService.getMany(ids);
+    }
+
     @PostMapping
-    AccountType create(@RequestBody AccountTypeDtoRequest accountType);
+    public AccountType create(@RequestBody AccountTypeDtoRequest accountType) {
+        return accountTypeService.create(accountType);
+    }
+
     @PatchMapping("/{id}")
-    AccountType patch(@PathVariable Integer id, @RequestBody AccountTypeDtoRequest accountType) throws IOException;
+    public AccountType patch(@PathVariable Integer id, @RequestBody AccountTypeDtoRequest accountType) {
+        return accountTypeService.patch(id, accountType);
+    }
+
     @DeleteMapping("/{id}")
-    void delete(@PathVariable Integer id);
+    public void delete(@PathVariable Integer id) {
+        accountTypeService.delete(id);
+    }
 }

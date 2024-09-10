@@ -10,7 +10,7 @@ import ru.pilot.request.account.UpdateAccountDtoRequest;
 import java.util.List;
 
 @FeignClient("account-client")
-public interface IAccountController {
+public interface IAccountClient {
     @GetMapping("/api/v1/accounts/{accountId}")
     Object getAccounts(@PathVariable("accountId") Integer accountId);
     @GetMapping("/api/v1/accounts")
