@@ -18,7 +18,7 @@ CREATE TABLE currencies (
 CREATE TABLE accounts (
     account_id SERIAL PRIMARY KEY,
     account_type_id INT REFERENCES account_types(account_type_id) ON DELETE CASCADE,
-    user_id INT,
+    customer_id INT,
     is_deleted boolean DEFAULT true,
     amount NUMERIC(15, 2) DEFAULT 0.00,
     currency_id INT REFERENCES currencies(currency_id) ON DELETE CASCADE,

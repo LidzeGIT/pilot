@@ -21,9 +21,6 @@ public class AccountControllerImpl implements AccountController {
     @Lazy
     private EurekaClient eurekaClient;
 
-    @Value("${spring.application.name}")
-    private String appName;
-
     @Autowired
     private AccountService accountService;
 

@@ -40,7 +40,7 @@ public class AccountService {
                 .orElseThrow(AccountTypeNotFoundException::new);
         Currency currency = currencyRepository.findByCurrencyCode(createAccountDto.currency())
                 .orElseThrow(CurrencyNotFoundException::new);
-        Account account = accountMapper.toEntity(accountType, createAccountDto.userId(), false,
+        Account account = accountMapper.toEntity(accountType, createAccountDto.customerId(), false,
                 BigDecimal.valueOf(createAccountDto.initialDeposit()), currency);
         account = accountRepository.save(account);
         return accountMapper.toDto(account);

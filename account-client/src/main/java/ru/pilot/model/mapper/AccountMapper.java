@@ -20,11 +20,11 @@ public interface AccountMapper {
     @Mapping(target = "isDeleted", source = "isDeleted")
     @Mapping(target = "amount", source = "amount")
     @Mapping(target = "currency", source = "currency")
-    Account toEntity(AccountType accountType, Integer userId, boolean isDeleted, BigDecimal amount, Currency currency);
+    Account toEntity(AccountType accountType, Integer customerId, boolean isDeleted, BigDecimal amount, Currency currency);
 
     @Mapping(target = "accountId", source = "id")
     @Mapping(target = "accountType", source = "accountType.accountType")
-    @Mapping(target = "userId", source = "userId")
+    @Mapping(target = "customerId", source = "customerId")
     @Mapping(target = "isClosed", source = "isDeleted")
     @Mapping(target = "currency", source = "currency.currencyCode")
     @Mapping(target = "createdAt", source = "createdAt")

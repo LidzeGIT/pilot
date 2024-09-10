@@ -22,8 +22,8 @@ public class Account {
     @JoinColumn(name = "account_type_id")
     private AccountType accountType;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "customer_id")
+    private Integer customerId;
 
     @Column(name = "is_deleted")
     private Boolean isDeleted;
@@ -71,12 +71,12 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public BigDecimal getAmount() {
