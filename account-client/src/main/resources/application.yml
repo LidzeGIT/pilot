@@ -1,0 +1,23 @@
+spring:
+    application:
+        name: account-client
+    liquibase:
+        enabled: true
+        change-log: classpath:db/changelog-master.yml
+        default-schema: public
+    datasource:
+        platform: postgres
+        driverClassName: org.postgresql.Driver
+        url: ${DB_HOST}
+        username: ${DB_USER}
+        password: ${DB_PASS}
+
+server:
+    port: 8081
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: ${EUREKA_URI}
+    instance:
+        preferIpAddress: true
