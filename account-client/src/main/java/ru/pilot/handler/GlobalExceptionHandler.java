@@ -15,30 +15,28 @@ import java.util.concurrent.TimeoutException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-  
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<?> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex){
-        return ResponseEntity.badRequest().body(new ErrorDtoResponse(ex.getMessage()));
+    public ResponseEntity<?> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+        return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
-    @ExceptionHandler(AccountNotFoundException.class)
-    public ResponseEntity<?> handeAccountNotFoundException(Exception ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDtoResponse(ex.getMessage()));
-    }
-    @ExceptionHandler(AccountTypeNotFoundException.class)
-    public ResponseEntity<?> handeAccountTypeNotFoundException(Exception ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDtoResponse(ex.getMessage()));
-    } 
-    @ExceptionHandler(CurrencyNotFoundException.class)
-    public ResponseEntity<?> handeCurrencyNotFoundException(Exception ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDtoResponse(ex.getMessage()));
-    }
-    @ExceptionHandler(UpdateValidationError.class)
-    public ResponseEntity<?> handeUpdateValidationError(Exception ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDtoResponse(ex.getMessage()));
+
+    @ExceptionHandler({
+                    UpdateValidationError.class,
+                    AccountNotFoundException.class,
+                    AccountTypeNotFoundException.class,
+                    CurrencyNotFoundException.class
+            })
+    public ResponseEntity<?> handeNotFound(Exception ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     @ExceptionHandler({TimeoutException.class})
     public ResponseEntity<?> handleTimeoutException(TimeoutException ex) {
-        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(new ErrorDtoResponse(ex.getMessage()));
+        return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+    }
+
+    private ResponseEntity<?> buildResponse(HttpStatus httpStatus, String message){
+        return ResponseEntity.status(httpStatus.value()).body(new ErrorDtoResponse(message));
     }
 }
